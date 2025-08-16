@@ -1,5 +1,5 @@
 // Impor nama komponen yang benar sesuai dengan nama fungsinya
-import { AboutPage } from "@/components/AboutPage";
+import { AboutPage } from "/components/AboutPage";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/components/HeroSection";
