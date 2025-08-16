@@ -1,0 +1,133 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { Menu } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import { ThemeToggle } from "./theme-toggle";
+
+// --- PERUBAHAN DI SINI ---
+// Tambahkan "/" di depan setiap href
+const navigationItems = [
+  { name: "About", href: "/#about" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Contact", href: "/#contact" },
+];
+
+export function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+
+      // Fungsi activeSection hanya relevan di halaman utama
+      if (window.location.pathname === "/") {
+        const sections = navigationItems.map((item) =>
+          document.querySelector(item.href.replace("/", ""))
+        );
+        const scrollPosition = window.scrollY + 100;
+
+        for (const section of sections) {
+          if (
+            section &&
+            scrollPosition >= (section as HTMLElement).offsetTop &&
+            scrollPosition <
+              (section as HTMLElement).offsetTop + section.clientHeight
+          ) {
+            setActiveSection(section.id);
+            break;
+          }
+        }
+      } else {
+        setActiveSection(""); // Nonaktifkan jika bukan di halaman utama
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    // Tambahkan event listener untuk navigasi agar state direset
+    window.addEventListener("popstate", handleScroll);
+
+    handleScroll(); // Panggil sekali saat inisialisasi
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("popstate", handleScroll);
+    };
+  }, []);
+
+  return (
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-300",
+        scrolled
+          ? "border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+          : "bg-transparent"
+      )}
+    >
+      <nav className="max-w-7xl mx-auto flex h-16 items-center justify-between px-6 lg:px-8">
+        {/* --- PERUBAHAN DI SINI --- */}
+        <Link href="/#home" className="flex items-center space-x-2">
+          <span className="text-lg font-bold">Akazell</span>
+        </Link>
+
+        <div className="hidden items-center gap-6 text-sm md:flex">
+          {navigationItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={cn(
+                "font-medium text-muted-foreground transition-colors hover:text-primary",
+                activeSection === item.href.substring(2) && "text-primary"
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <div className="md:hidden">
+            <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle Menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right">
+                <SheetHeader>
+                  <SheetTitle className="text-left">Menu</SheetTitle>
+                </SheetHeader>
+                <div className="grid gap-4 py-6">
+                  {navigationItems.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setIsSheetOpen(false)}
+                      className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
+}

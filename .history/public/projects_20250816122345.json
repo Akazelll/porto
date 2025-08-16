@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Form Recruitment",
+    "description": "A project for HMTI Udinus to streamline the member recruitment process using an efficient online registration system built with PHP and MySQL.",
+    "image": "/images/project1.webp",
+    "technologies": ["PHP", "MySQL", "HTML", "CSS"],
+    "liveLink": "#",
+    "repoLink": "https://github.com/Akazelll/FormRecruitment"
+  },
+  {
+    "id": 2,
+    "title": "DigiPustaka",
+    "description": "A modern web application to manage a digital library's operations, including book and publisher management, and loan tracking.",
+    "image": "/images/Screenshot 2025-06-28 141635.png",
+    "technologies": ["Laravel 11", "Tailwind CSS", "MySQL"],
+    "liveLink": "#",
+    "repoLink": "https://github.com/Akazelll/DigitalLibrary"
+  },
+  {
+    "id": 3,
+    "title": "Ecotrack",
+    "description": "A smart solution for tracking environmental data, focusing on waste management and sustainability, built with the MERN stack.",
+    "image": "/images/ecotrack.png",
+    "technologies": ["React", "Node.js", "MongoDB"],
+    "liveLink": "https://akazellapp.netlify.app/",
+    "repoLink": "#"
+  }
+]
