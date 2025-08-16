@@ -1,5 +1,3 @@
-"use client"; // Pastikan ini adalah Client Component untuk menggunakan hook
-
 import {
   Card,
   CardContent,
@@ -12,32 +10,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 
-// 1. Impor hook useProjectContext
-import { useProjectContext } from "@/context/ProjectContext";
+// Asumsikan data proyek Anda ada di public/projects.json
+import projects from "../../public/projects.json";
 
 export function ProjectPage() {
-  // 2. Ambil data projects dan loading dari context
-  const { projects, loading } = useProjectContext();
-
-  // Tampilkan pesan loading jika data belum siap
-  if (loading) {
-    return (
-      <section id="projects" className="container py-24 sm:py-32">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          My Projects
-        </h2>
-        <div className="text-center">
-          <p className="text-muted-foreground">Loading projects...</p>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section id="projects" className="container py-24 sm:py-32">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
         My Projects
       </h2>
+      {/* Grid yang lebih responsif */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
           <Card key={project.id} className="flex flex-col">
