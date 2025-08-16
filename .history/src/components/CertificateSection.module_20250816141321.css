@@ -1,0 +1,17 @@
+.marqueeContainer {
+  display: flex;
+  /* Hapus animasi dari sini, kita akan menambahkannya via inline style */
+}
+
+.animate {
+  animation: marquee linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

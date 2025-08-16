@@ -33,7 +33,7 @@ export function CertificateSection() {
     fetchCertificates();
   }, []);
 
-  const animationDuration = certificates.length * 1.5 + "s";
+  const animationDuration = certificates.length * 2 + "s";
 
   if (loading) {
     return (
