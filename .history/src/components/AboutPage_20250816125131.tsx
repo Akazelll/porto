@@ -33,6 +33,7 @@ export function AboutPage() {
               src="/images/profilepicture.jpg"
               alt="Akazell Profile"
             />
+            <AvatarFallback>AK</AvatarFallback>
           </Avatar>
         </div>
         <div className="text-center lg:col-span-3 lg:text-left">

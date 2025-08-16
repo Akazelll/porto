@@ -15,7 +15,7 @@ interface Certificate {
 export function CertificateSection() {
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   const carouselRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const startX = useRef(0);
@@ -60,6 +60,7 @@ export function CertificateSection() {
     };
   }, [loading]);
 
+  // --- HANDLER UNTUK MOUSE ---
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!carouselRef.current) return;
     isDragging.current = true;
@@ -79,7 +80,8 @@ export function CertificateSection() {
     carouselRef.current.scrollLeft = scrollLeftStart.current - walk;
   };
 
-    const handleTouchStart = (e: React.TouchEvent) => {
+  // --- HANDLER BARU UNTUK SENTUHAN ---
+  const handleTouchStart = (e: React.TouchEvent) => {
     if (!carouselRef.current) return;
     isDragging.current = true;
     startX.current = e.touches[0].pageX - carouselRef.current.offsetLeft;
@@ -99,60 +101,58 @@ export function CertificateSection() {
 
   if (loading) {
     return (
-      <section id="certificates" className="py-28 sm:py-36">
-        <div className="text-center">
-          <p className="text-muted-foreground">Loading certificates...</p>
-        </div>
-      </section>
+        <section id="certificates" className="py-28 sm:py-36">
+            <div className="text-center">
+                <p className="text-muted-foreground">Loading certificates...</p>
+            </div>
+        </section>
     );
   }
 
   return (
     <section id="certificates" className="py-28 sm:py-36">
-      {/* --- PERUBAHAN DI SINI --- */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
           My Certificates
         </h2>
+      </div>
 
-        {/* Carousel sekarang ada di dalam container utama */}
-        <div
-          className="relative w-full overflow-x-hidden cursor-grab active:cursor-grabbing"
-          ref={carouselRef}
-          onMouseDown={handleMouseDown}
-          onMouseLeave={handleMouseLeaveOrUp}
-          onMouseUp={handleMouseLeaveOrUp}
-          onMouseMove={handleMouseMove}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          onTouchMove={handleTouchMove}
-        >
-          <div className="flex">
-            {certificates.map((cert, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4 select-none"
-              >
-                <Card className="flex h-full flex-col overflow-hidden pointer-events-none">
-                  <div className="aspect-video overflow-hidden">
-                    <Image
-                      src={cert.image}
-                      alt={cert.title}
-                      width={500}
-                      height={300}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-grow flex-col p-6">
-                    <CardTitle className="mb-2 text-lg">{cert.title}</CardTitle>
-                    <p className="text-sm text-muted-foreground">
-                      {cert.issuer}
-                    </p>
-                  </div>
-                </Card>
-              </div>
-            ))}
-          </div>
+      <div
+        className="relative w-full overflow-x-hidden cursor-grab active:cursor-grabbing"
+        ref={carouselRef}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeaveOrUp}
+        onMouseUp={handleMouseLeaveOrUp}
+        onMouseMove={handleMouseMove}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchMove}
+      >
+        <div className="flex">
+          {certificates.map((cert, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4 select-none"
+            >
+              <Card className="flex h-full flex-col overflow-hidden pointer-events-none">
+                <div className="aspect-video overflow-hidden">
+                  <Image
+                    src={cert.image}
+                    alt={cert.title}
+                    width={500}
+                    height={300}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-grow flex-col p-6">
+                  <CardTitle className="mb-2 text-lg">{cert.title}</CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    {cert.issuer}
+                  </p>
+                </div>
+              </Card>
+            </div>
+          ))}
         </div>
       </div>
     </section>
