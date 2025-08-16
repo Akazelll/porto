@@ -40,13 +40,12 @@ export function Navbar() {
           : "bg-transparent"
       )}
     >
-      {/* Jarak diubah dari px-4 menjadi px-6 sm:px-8 */}
-      <nav className="container flex h-20 items-center justify-between px-6 sm:px-8">
+      <nav className="container flex h-16 items-center justify-between">
         <Link href="#" className="flex items-center space-x-2">
-          <span className="font-bold text-xl">Akazell</span>
+          <span className="font-bold text-lg">Akazell</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8 text-sm">
+        <div className="hidden md:flex items-center gap-6 text-sm">
           {navigationItems.map((item) => (
             <Link
               key={item.name}
@@ -64,7 +63,7 @@ export function Navbar() {
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
+                  <Menu className="h-5 w-5" />
                   <span className="sr-only">Toggle Menu</span>
                 </Button>
               </SheetTrigger>
@@ -72,7 +71,7 @@ export function Navbar() {
                 <SheetHeader>
                   <SheetTitle className="text-left">Menu</SheetTitle>
                 </SheetHeader>
-                <div className="grid gap-6 text-lg font-medium p-6">
+                <div className="grid gap-6 text-lg font-medium p-4">
                   {navigationItems.map((item) => (
                     <Link
                       key={item.name}

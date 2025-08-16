@@ -1,8 +1,7 @@
 export function Footer() {
   return (
     <footer id="footer" className="border-t">
-      {/* Tambahkan `px-4` di sini */}
-      <div className="container px-4 py-8 text-center text-sm text-muted-foreground">
+      <div className="container py-8 text-center text-sm text-muted-foreground">
         <p>
           &copy; {new Date().getFullYear()} Built and designed by{" "}
           <a
