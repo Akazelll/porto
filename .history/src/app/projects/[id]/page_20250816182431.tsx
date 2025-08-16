@@ -39,9 +39,8 @@ export default function ProjectDetailsPage() {
     return (
       <div className="flex h-screen flex-col items-center justify-center gap-4 text-center px-4">
         <h1 className="text-4xl font-bold">Project Not Found</h1>
-        {/* --- PERUBAHAN DI SINI --- */}
         <p className="text-lg text-muted-foreground">
-          Sorry, we couldn&apos;t find the project you&apos;re looking for.
+          Sorry, we couldn't find the project you're looking for.
         </p>
         <Button onClick={() => router.push("/")}>
           <ArrowLeft className="mr-2 h-4 w-4" />

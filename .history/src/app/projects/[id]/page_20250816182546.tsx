@@ -28,11 +28,7 @@ export default function ProjectDetailsPage() {
   }, [params.id, getProjectById, loading]);
 
   if (project === undefined) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <p className="text-lg text-muted-foreground">Loading project...</p>
-      </div>
-    );
+    
   }
 
   if (project === null) {

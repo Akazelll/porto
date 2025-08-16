@@ -43,7 +43,7 @@ export function HeroSection() {
               <Github className="h-4 w-4" />
             </Button>
           </Link>
-          <Link href="" target="_blank" rel="noopener noreferrer">
+          <Link href="https://www.linkedin.com/in/adamxraga/" target="_blank" rel="noopener noreferrer">
             <Button variant="outline" size="icon">
               <Linkedin className="h-4 w-4" />
             </Button>
