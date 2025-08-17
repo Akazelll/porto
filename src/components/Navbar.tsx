@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
-import { usePathname } from "next/navigation"; // Impor usePathname
+import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,7 +16,6 @@ import {
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./theme-toggle";
 
-
 const navigationItems = [
   { name: "About", href: "/#about" },
   { name: "Projects", href: "/#projects" },
@@ -28,18 +27,17 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const pathname = usePathname(); // Dapatkan path URL saat ini
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
 
-      // Fitur menu aktif hanya berjalan di halaman utama
       if (pathname === "/") {
         const sections = navigationItems.map((item) =>
-          document.querySelector(item.href.substring(1)) // Hapus '/' dari href
+          document.querySelector(item.href.substring(1))
         );
-        const scrollPosition = window.scrollY + 150; // Sedikit offset
+        const scrollPosition = window.scrollY + 150;
 
         let currentSection = "";
         for (const section of sections) {
@@ -55,17 +53,17 @@ export function Navbar() {
         }
         setActiveSection(currentSection);
       } else {
-        setActiveSection(""); // Nonaktifkan jika bukan di halaman utama
+        setActiveSection("");
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Panggil saat komponen dimuat
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [pathname, scrolled]); // Tambahkan pathname dan scrolled sebagai dependensi
+  }, [pathname, scrolled]);
 
   return (
     <header
@@ -81,7 +79,7 @@ export function Navbar() {
           <span className="text-lg font-bold">Akazell</span>
         </Link>
 
-        <div className="hidden items-center gap-6 text-sm md:flex">
+        <div className="hidden md:flex items-center gap-6 text-sm">
           {navigationItems.map((item) => (
             <Link
               key={item.name}
@@ -96,35 +94,38 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
-          <div className="md:hidden">
-            <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Toggle Menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right">
-                <SheetHeader>
-                  <SheetTitle className="text-left">Menu</SheetTitle>
-                </SheetHeader>
-                <div className="grid gap-4 py-6">
-                  {navigationItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => setIsSheetOpen(false)}
-                      className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+              <SheetHeader>
+                <SheetTitle className="text-left px-2">Menu</SheetTitle>
+              </SheetHeader>
+              
+              <div className="grid py-6 px-2">
+                {navigationItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsSheetOpen(false)}
+                    className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary px-4 py-2 rounded-md"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+
+        <div className="hidden md:flex">
+          <ThemeToggle />
         </div>
       </nav>
     </header>
