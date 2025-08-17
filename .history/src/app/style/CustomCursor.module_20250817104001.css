@@ -1,0 +1,28 @@
+/* Sembunyikan kursor asli di seluruh halaman */
+:global(body) {
+  cursor: none;
+}
+
+/* Style untuk kepala meteor (kursor utama) */
+.cursor {
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference; /* Efek warna terbalik */
+}
+
+/* Style untuk setiap bagian dari ekor meteor */
+.trail {
+  position: fixed;
+  z-index: 9998;
+  pointer-events: none;
+  border-radius: 50%;
+  background-image: linear-gradient(to right, #8B5CF6, #3B82F6); /* Gradien ungu ke biru */
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease-out; /* Transisi untuk efek mengikuti yang lebih lambat */
+}

@@ -1,0 +1,29 @@
+/* Kelas untuk container utama HeroSection */
+.heroContainer {
+  position: relative; /* Diperlukan agar latar belakang bisa berada di belakang konten */
+  overflow: hidden; /* Menyembunyikan bagian gradien yang berada di luar layar */
+}
+
+/* Kelas untuk latar belakang gelombang gradien */
+.gradientBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400%; /* Membuat gradien 4x lebih lebar dari layar */
+  height: 400%; /* Membuat gradien 4x lebih tinggi dari layar */
+  z-index: -1; /* Posisikan di belakang konten teks dan tombol */
+  
+  /* Gradien ungu ke biru Anda */
+  background: linear-gradient(125deg, #4f46e5, #8b5cf6, #3b82f6, #60a5fa);
+  background-size: 200% 200%; /* Ukuran background untuk animasi */
+
+  /* Menerapkan animasi */
+  animation: wave 15s ease infinite;
+}
+
+/* Keyframes untuk animasi gelombang */
+@keyframes wave {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

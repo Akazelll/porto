@@ -1,0 +1,36 @@
+/* Sembunyikan kursor asli di seluruh halaman */
+:global(body) {
+  cursor: none;
+}
+
+/* Style untuk setiap partikel sparkle */
+.sparkle {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  
+  /* Gradien ungu ke biru */
+  background-image: linear-gradient(to right, #8B5CF6, #3B82F6);
+  
+  /* Membuat bentuk bintang 4 sudut */
+  clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+
+  /* Menerapkan animasi */
+  animation: sparkle-animation 0.8s ease-out forwards;
+}
+
+/* Keyframes untuk animasi sparkle */
+@keyframes sparkle-animation {
+  0% {
+    transform: scale(0.5) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
