@@ -1,21 +1,16 @@
 "use client";
 
 import { useCallback } from "react";
+import type { Container, Engine } from "@tsparticles/engine";
+import Particles from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
-import Particles from "@tsparticles/react";
-import { loadSlim } from "tsparticles-slim";
-import type { Engine, Container } from "tsparticles-engine";
 
 export function HeroSection() {
   const particlesInit = useCallback(async (engine: Engine) => {
-
     await loadSlim(engine);
-  }, []);
-
-  const particlesLoaded = useCallback(async (container?: Container) => {
-    console.log(container);
   }, []);
 
   return (
@@ -26,78 +21,33 @@ export function HeroSection() {
       <Particles
         id="tsparticles"
         init={particlesInit}
-        loaded={particlesLoaded}
         options={{
-          background: {
-            color: {
-              value: "transparent",
-            },
-          },
+          background: { color: { value: "transparent" } },
           fpsLimit: 60,
           interactivity: {
-            events: {
-              onHover: {
-                enable: true,
-                mode: "repulse",
-              },
-              resize: true,
-            },
-            modes: {
-              repulse: {
-                distance: 100,
-                duration: 0.4,
-              },
-            },
+            events: { onHover: { enable: true, mode: "repulse" }, resize: true },
+            modes: { repulse: { distance: 100, duration: 0.4 } },
           },
           particles: {
-            color: {
-              value: "#8b5cf6",
-            },
-            links: {
-              color: "#3b82f6",
-              distance: 150,
-              enable: true,
-              opacity: 0.4,
-              width: 1,
-            },
-            move: {
-              direction: "none",
-              enable: true,
-              outModes: {
-                default: "out",
-              },
-              random: true,
-              speed: 2,
-              straight: false,
-            },
-            number: {
-              density: {
-                enable: true,
-              },
-              value: 80,
-            },
-            opacity: {
-              value: 0.5,
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              value: { min: 1, max: 4 },
-            },
+            color: { value: "#8b5cf6" },
+            links: { color: "#3b82f6", distance: 150, enable: true, opacity: 0.4, width: 1 },
+            move: { direction: "none", enable: true, outModes: { default: "out" }, random: true, speed: 2, straight: false },
+            number: { density: { enable: true }, value: 80 },
+            opacity: { value: 0.5 },
+            shape: { type: "circle" },
+            size: { value: { min: 1, max: 4 } },
           },
           detectRetina: true,
         }}
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
-          width: "100%",
-          height: "100%",
+          width: '100%',
+          height: '100%',
           zIndex: 0,
         }}
       />
-
       <div className="container z-10 flex flex-col items-center justify-center gap-8 px-4 text-center">
         <div className="space-y-4">
           <main className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">

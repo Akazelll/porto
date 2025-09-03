@@ -1,6 +1,10 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useCallback } from "react";
+import type { Container, Engine } from "@tsparticles/engine";
+import Particles from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,9 +14,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import Particles from "@tsparticles/react";
-import { loadSlim } from "tsparticles-slim";
-import type { Container, Engine } from "@tsparticles/engine";
 
 export default function ProjectDetailsPage() {
   const { getProjectById, loading } = useProjectContext();
@@ -84,7 +85,6 @@ export default function ProjectDetailsPage() {
         }}
         style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}
       />
-
       <Navbar /> 
       <main className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 py-24 sm:py-32">
         <div className="mb-12">
