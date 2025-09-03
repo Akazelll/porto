@@ -2,7 +2,6 @@
 
 import React, { createContext, useState, useEffect, ReactNode, useContext } from "react";
 
-// Definisikan tipe (interface) untuk setiap objek proyek
 export interface Project {
   id: number;
   title: string;
@@ -13,7 +12,6 @@ export interface Project {
   repoLink: string;
 }
 
-// Definisikan tipe untuk context
 interface ProjectContextType {
   projects: Project[];
   loading: boolean;

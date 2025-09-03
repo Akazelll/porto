@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,14 +10,15 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import Particles from "react-tsparticles";
+import { loadSlim } from "tsparticles-slim";
+import type { Container, Engine } from "@tsparticles/engine";
 
 export default function ProjectDetailsPage() {
   const { getProjectById, loading } = useProjectContext();
   const params = useParams();
   const router = useRouter();
-  const [project, setProject] = useState<Project | null | undefined>(
-    undefined
-  );
+  const [project, setProject] = useState<Project | null | undefined>(undefined);
 
   useEffect(() => {
     if (!loading && params.id) {
@@ -27,9 +28,13 @@ export default function ProjectDetailsPage() {
     }
   }, [params.id, getProjectById, loading]);
 
+  const particlesInit = useCallback(async (engine: Engine) => {
+    await loadSlim(engine);
+  }, []);
+
   if (project === undefined) {
     return (
-      <div className="flex h-screen items-center justify-center">
+      <div className="flex h-screen items-center justify-center bg-background">
         <p className="text-lg text-muted-foreground">Loading project...</p>
       </div>
     );
@@ -37,44 +42,64 @@ export default function ProjectDetailsPage() {
 
   if (project === null) {
     return (
-      <div className="flex h-screen flex-col items-center justify-center gap-4 text-center px-4">
-        <h1 className="text-4xl font-bold">Project Not Found</h1>
-        {/* --- PERUBAHAN DI SINI --- */}
-        <p className="text-lg text-muted-foreground">
-          Sorry, we couldn&apos;t find the project you&apos;re looking for.
-        </p>
-        <Button onClick={() => router.push("/")}>
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Home
-        </Button>
-      </div>
+      <>
+        <Navbar />
+        <main className="flex h-[calc(100vh-8rem)] flex-col items-center justify-center gap-4 text-center px-4">
+          <h1 className="text-4xl font-bold">Project Not Found</h1>
+          <p className="text-lg text-muted-foreground">
+            Sorry, we couldn&apos;t find the project you&apos;re looking for.
+          </p>
+          <Button onClick={() => router.push("/")}>
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Home
+          </Button>
+        </main>
+        <Footer />
+      </>
     );
   }
 
   return (
-    <>
-      <Navbar />
-      <main className="max-w-6xl mx-auto px-6 lg:px-8 py-24 sm:py-32">
-        {/* Header: Tombol Kembali dan Judul */}
+    <div className="bg-background">
+      <Particles
+        id="tsparticles-details"
+        init={particlesInit}
+        options={{
+          background: { color: { value: "transparent" } },
+          fpsLimit: 60,
+          interactivity: {
+            events: { onHover: { enable: true, mode: "repulse" }, resize: true },
+            modes: { repulse: { distance: 100, duration: 0.4 } },
+          },
+          particles: {
+            color: { value: "#8b5cf6" },
+            links: { color: "#3b82f6", distance: 150, enable: true, opacity: 0.2, width: 1 },
+            move: { direction: "none", enable: true, outModes: { default: "out" }, random: true, speed: 1, straight: false },
+            number: { density: { enable: true }, value: 50 },
+            opacity: { value: 0.3 },
+            shape: { type: "circle" },
+            size: { value: { min: 1, max: 3 } },
+          },
+          detectRetina: true,
+        }}
+        style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}
+      />
+
+      <Navbar /> 
+      <main className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 py-24 sm:py-32">
         <div className="mb-12">
-          <Button
-            variant="ghost"
-            onClick={() => router.back()}
-            className="mb-4"
-          >
+          <Button variant="ghost" onClick={() => router.back()} className="mb-4">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Projects
           </Button>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
             {project.title}
           </h1>
         </div>
 
-        {/* Konten Utama: Grid */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-          {/* Kolom Kiri: Gambar Proyek */}
           <div className="lg:col-span-2">
-            <div className="aspect-video overflow-hidden rounded-lg border shadow-sm">
+            <div className="aspect-video overflow-hidden rounded-lg border bg-background/50 backdrop-blur-sm shadow-xl">
               <Image
                 src={project.image}
                 alt={`Screenshot of ${project.title}`}
@@ -86,10 +111,8 @@ export default function ProjectDetailsPage() {
             </div>
           </div>
 
-          {/* Kolom Kanan (Sidebar): Info Penting */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-8">
-              {/* Tautan Aksi */}
+            <div className="sticky top-28 space-y-8 rounded-lg border bg-background/50 p-6 backdrop-blur-sm shadow-xl">
               <div>
                 <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-muted-foreground">
                   Links
@@ -113,17 +136,13 @@ export default function ProjectDetailsPage() {
                   )}
                 </div>
               </div>
-
-              {/* Teknologi */}
               <div>
                 <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-muted-foreground">
                   Technologies
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
-                    <Badge key={tech} variant="secondary">
-                      {tech}
-                    </Badge>
+                    <Badge key={tech} variant="secondary">{tech}</Badge>
                   ))}
                 </div>
               </div>
@@ -131,17 +150,14 @@ export default function ProjectDetailsPage() {
           </div>
         </div>
 
-        {/* Deskripsi Proyek di Bawah */}
-        <div className="mt-16 border-t pt-12">
-          <h2 className="mb-4 text-2xl font-bold">
-            About This Project
-          </h2>
-          <div className="prose prose-lg max-w-none text-muted-foreground">
+        <div className="mt-16 rounded-lg border bg-background/50 p-8 backdrop-blur-sm shadow-xl">
+          <h2 className="mb-4 text-2xl font-bold">About This Project</h2>
+          <div className="prose prose-lg max-w-none text-muted-foreground prose-p:my-4">
             <p>{project.description}</p>
           </div>
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

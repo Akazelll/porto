@@ -10,7 +10,7 @@ import type { Engine, Container } from "tsparticles-engine";
 
 export function HeroSection() {
   const particlesInit = useCallback(async (engine: Engine) => {
-    // loadSlim adalah preset ringan (lebih kecil dari full)
+
     await loadSlim(engine);
   }, []);
 
@@ -133,12 +133,12 @@ export function HeroSection() {
                 <Github className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="#" target="_blank" rel="noopener noreferrer">
+            <Link href="https://www.linkedin.com/in/adamxraga" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="icon">
                 <Linkedin className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="mailto:akazell22@gmail.com">
+            <Link href="mailto:adamxraga@gmail.com">
               <Button variant="outline" size="icon">
                 <Mail className="h-4 w-4" />
               </Button>
