@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
-import Particles from "@tsparticles/react";
+import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import type { Engine, Container } from "tsparticles-engine";
 
