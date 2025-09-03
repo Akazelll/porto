@@ -1,7 +1,7 @@
 "use client";
 
-// PERBAIKAN: Menghapus 'useCallback', 'Container', dan 'Engine' yang tidak digunakan
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import type { Container, Engine } from "@tsparticles/engine";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import { Button } from "@/components/ui/button";
@@ -31,11 +31,7 @@ export function HeroSection() {
             background: { color: { value: "transparent" } },
             fpsLimit: 60,
             interactivity: {
-              events: { 
-                onHover: { enable: true, mode: "repulse" },
-                // PERBAIKAN: Mengubah `resize: true` menjadi objek untuk memperbaiki Type Error
-                resize: { enable: true }
-              },
+              events: { onHover: { enable: true, mode: "repulse" }, resize: true },
               modes: { repulse: { distance: 100, duration: 0.4 } },
             },
             particles: {
@@ -101,6 +97,7 @@ export function HeroSection() {
                 <Github className="h-4 w-4" />
               </Button>
             </Link>
+            {/* PERBAIKAN: Menghapus <Button> yang berlebihan di dalam <Button> */}
             <Link href="https://www.linkedin.com/in/adamxraga" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="icon">
                 <Linkedin className="h-4 w-4" />
@@ -117,4 +114,3 @@ export function HeroSection() {
     </section>
   );
 }
-

@@ -1,7 +1,6 @@
 "use client";
 
-// PERBAIKAN: Menambahkan 'useCallback'
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { Card, CardTitle } from "@/components/ui/card";
 
@@ -38,8 +37,7 @@ export function CertificateSection() {
     fetchCertificates();
   }, []);
 
-  // PERBAIKAN: Membungkus autoScroll dengan useCallback agar referensinya stabil
-  const autoScroll = useCallback(() => {
+  const autoScroll = () => {
     if (carouselRef.current && !isDragging.current) {
       const { scrollLeft, scrollWidth } = carouselRef.current;
       if (scrollLeft >= scrollWidth / 2) {
@@ -49,11 +47,10 @@ export function CertificateSection() {
       }
     }
     animationFrameId.current = requestAnimationFrame(autoScroll);
-  }, []);
+  };
 
   useEffect(() => {
     if (!loading) {
-      // PERBAIKAN: Memanggil referensi fungsi yang stabil
       animationFrameId.current = requestAnimationFrame(autoScroll);
     }
     return () => {
@@ -61,8 +58,7 @@ export function CertificateSection() {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
-  // PERBAIKAN: Menambahkan `autoScroll` ke dependency array
-  }, [loading, autoScroll]);
+  }, [loading]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!carouselRef.current) return;
