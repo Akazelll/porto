@@ -25,5 +25,14 @@
     "technologies": ["React", "Node.js", "TypeScript"],
     "liveLink": "https://portfolio-five-pink-33.vercel.app/",
     "repoLink": "#"
+  },
+  {
+    "id": 4,
+    "title": "Kostify",
+    "description": "Kostify is a web-based application designed to streamline the management of boarding houses, locally known as 'kos,' offering a comprehensive solution for property managers to efficiently handle rooms, tenants, and billing. This modern tool, built with Laravel, provides a user-friendly interface for tracking room availability, managing tenant information, and automating the billing process. The central dashboard offers an at-a-glance overview of key statistics, such as room occupancy and outstanding payments, enabling property owners to modernize their operations and stay informed about the state of their business.",
+    "image": "/images/project4.png",
+    "technologies": ["Laravel", "ShadCN UI", "Tailwind CSS", "MySQL"],
+    "liveLink": "#",
+    "repoLink": "https://github.com/Akazelll/Kostify"
   }
 ]
