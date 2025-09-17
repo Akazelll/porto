@@ -54,7 +54,6 @@ export function AboutPage() {
                 src="/images/profilepicture.jpg"
                 alt="Akazell Profile"
               />
-              <AvatarFallback>AK</AvatarFallback>
             </Avatar>
 
             {/* Floating Skill Icons */}
