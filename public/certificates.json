@@ -40,5 +40,11 @@
     "title": "Hour of Code Training",
     "issuer": "Ruang Guru",
     "image": "/images/sertif7.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Participant At the Genetic Algorithm Seminar",
+    "issuer": "Bengkel Koding Academy",
+    "image": "/images/sertif8.png"
   }
 ]

@@ -74,12 +74,12 @@ export function Navbar() {
           : "bg-transparent"
       )}
     >
-      <nav className="max-w-7xl mx-auto flex h-16 items-center justify-between px-6 lg:px-8">
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="text-lg font-bold">Akazell</span>
+      <nav className='max-w-7xl mx-auto flex h-16 items-center justify-between px-6 lg:px-8'>
+        <Link href='/' className='flex items-center space-x-2'>
+          <span className='text-lg font-bold'>Akazell</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-6 text-sm">
+        <div className='hidden md:flex items-center gap-6 text-sm'>
           {navigationItems.map((item) => (
             <Link
               key={item.name}
@@ -94,27 +94,27 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className='flex items-center gap-2 md:hidden'>
           <ThemeToggle />
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle Menu</span>
+              <Button variant='ghost' size='icon'>
+                <Menu className='h-5 w-5' />
+                <span className='sr-only'>Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right">
+            <SheetContent side='right'>
               <SheetHeader>
-                <SheetTitle className="text-left px-2">Menu</SheetTitle>
+                <SheetTitle className='text-left px-2'>Menu</SheetTitle>
               </SheetHeader>
-              
-              <div className="grid py-6 px-2">
+
+              <div className='grid py-6 px-2'>
                 {navigationItems.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
                     onClick={() => setIsSheetOpen(false)}
-                    className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary px-4 py-2 rounded-md"
+                    className='text-lg font-medium text-muted-foreground transition-colors hover:text-primary px-4 py-2 rounded-md'
                   >
                     {item.name}
                   </Link>
@@ -124,7 +124,7 @@ export function Navbar() {
           </Sheet>
         </div>
 
-        <div className="hidden md:flex">
+        <div className='hidden md:flex'>
           <ThemeToggle />
         </div>
       </nav>

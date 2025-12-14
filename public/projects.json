@@ -12,7 +12,7 @@
     "id": 2,
     "title": "DigiPustaka",
     "description": "A modern web application to manage a digital library's operations, including book and publisher management, and loan tracking.",
-    "image": "/images/Screenshot 2025-06-28 141635.png",
+    "image": "/images/project2.png",
     "technologies": ["Laravel 11", "Tailwind CSS", "MySQL"],
     "liveLink": "#",
     "repoLink": "https://github.com/Akazelll/DigitalLibrary"
@@ -34,5 +34,14 @@
     "technologies": ["Laravel", "ShadCN UI", "Tailwind CSS", "MySQL"],
     "liveLink": "#",
     "repoLink": "https://github.com/Akazelll/Kostify"
+  },
+  {
+    "id": 5,
+    "title": "Agri-Smart",
+    "description": "AgriSmart dikembangkan sebagai solusi Smart Farming untuk meningkatkan produktivitas petani padi. Aplikasi ini mengimplementasikan model Deep Learning (EfficientNet) yang di-deploy menggunakan Python (Flask) untuk mengklasifikasi jenis penyakit daun padi seperti Leaf Blast, Brown Spot, dan Leaf Smut dengan akurasi tinggi.\n\nSisi antarmuka dibangun menggunakan Next.js 15 untuk performa yang cepat dan responsif, terintegrasi dengan Supabase sebagai backend-as-a-service untuk autentikasi pengguna, penyimpanan riwayat diagnosa, dan manajemen data keuangan secara real-time.",
+    "image": "/images/project5.png",
+    "technologies": ["React", "Node.js", "NextJS", "Supabase","ShadCN UI","Python","EfficientNet"],
+    "liveLink": "https://www.agri-smart.biz.id/",
+    "repoLink": "https://github.com/Akazelll/AgriSmart"
   }
 ]
