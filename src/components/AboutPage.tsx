@@ -28,7 +28,7 @@ export function AboutPage() {
       className="relative overflow-hidden bg-muted/50 py-24 sm:py-32"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12 items-center">
-        {/* Kolom Teks (Muncul pertama di mobile) */}
+        
         <div className="text-center lg:text-left lg:order-1">
           <h2 className="text-base font-semibold leading-7 text-primary">
             About Me
@@ -43,10 +43,8 @@ export function AboutPage() {
           </p>
         </div>
 
-        {/* Kolom Avatar dan Skills (Muncul kedua di mobile) */}
         <div className="relative flex justify-center lg:order-2">
           <div className="relative w-64 h-64 sm:w-80 sm:h-80">
-            {/* Efek "Glow" di belakang avatar */}
             <div className="absolute inset-0 bg-gradient-to-tr from-purple-500 to-blue-500 rounded-full blur-2xl opacity-50 animate-pulse"></div>
             
             <Avatar className="relative w-full h-full border-4 border-background shadow-2xl">
@@ -56,7 +54,6 @@ export function AboutPage() {
               />
             </Avatar>
 
-            {/* Floating Skill Icons */}
             <div className="absolute -bottom-4 -left-4 flex flex-col gap-3">
               {skills.slice(0, 2).map((skill) => (
                 <div 

@@ -14,10 +14,10 @@ export function AnimatedSection({ children, className, id }: AnimatedSectionProp
     <motion.section
       id={id}
       className={className}
-      initial={{ opacity: 0, y: 50 }} // Mulai dari transparan dan sedikit di bawah
-      whileInView={{ opacity: 1, y: 0 }} // Animasikan ke visible dan posisi asli
-      viewport={{ once: true, amount: 0.2 }} // Animasi berjalan sekali saat 20% elemen terlihat
-      transition={{ duration: 0.8, ease: "easeOut" }} // Durasi dan jenis animasi
+      initial={{ opacity: 0, y: 50 }} 
+      whileInView={{ opacity: 1, y: 0 }} 
+      viewport={{ once: true, amount: 0.2 }} 
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
       {children}
     </motion.section>
