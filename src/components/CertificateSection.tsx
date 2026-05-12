@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Card, CardTitle } from "@/components/ui/card";
 
+import { Card, CardTitle } from "@/components/ui/card";
 
 interface Certificate {
   id: number;
@@ -15,7 +15,6 @@ interface Certificate {
 export function CertificateSection() {
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [loading, setLoading] = useState(true);
-  
   const carouselRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const startX = useRef(0);
@@ -40,111 +39,67 @@ export function CertificateSection() {
   const autoScroll = useCallback(() => {
     if (carouselRef.current && !isDragging.current) {
       const { scrollLeft, scrollWidth } = carouselRef.current;
-      if (scrollLeft >= scrollWidth / 2) {
-        carouselRef.current.scrollLeft = 0;
-      } else {
-        carouselRef.current.scrollLeft += 1;
-      }
+      carouselRef.current.scrollLeft = scrollLeft >= scrollWidth / 2 ? 0 : scrollLeft + 0.8;
     }
     animationFrameId.current = requestAnimationFrame(autoScroll);
   }, []);
 
   useEffect(() => {
-    if (!loading) {
-      animationFrameId.current = requestAnimationFrame(autoScroll);
-    }
+    if (!loading) animationFrameId.current = requestAnimationFrame(autoScroll);
     return () => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
+      if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
     };
-  }, [loading, autoScroll]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!carouselRef.current) return;
-    isDragging.current = true;
-    startX.current = e.pageX - carouselRef.current.offsetLeft;
-    scrollLeftStart.current = carouselRef.current.scrollLeft;
-  };
-
-  const handleMouseLeaveOrUp = () => {
-    isDragging.current = false;
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current || !carouselRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - carouselRef.current.offsetLeft;
-    const walk = (x - startX.current) * 2;
-    carouselRef.current.scrollLeft = scrollLeftStart.current - walk;
-  };
-
-    const handleTouchStart = (e: React.TouchEvent) => {
-    if (!carouselRef.current) return;
-    isDragging.current = true;
-    startX.current = e.touches[0].pageX - carouselRef.current.offsetLeft;
-    scrollLeftStart.current = carouselRef.current.scrollLeft;
-  };
-
-  const handleTouchEnd = () => {
-    isDragging.current = false;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging.current || !carouselRef.current) return;
-    const x = e.touches[0].pageX - carouselRef.current.offsetLeft;
-    const walk = (x - startX.current) * 2;
-    carouselRef.current.scrollLeft = scrollLeftStart.current - walk;
-  };
+  }, [autoScroll, loading]);
 
   if (loading) {
-    return (
-      <section id="certificates" className="py-28 sm:py-36">
-        <div className="text-center">
-          <p className="text-muted-foreground">Loading certificates...</p>
-        </div>
-      </section>
-    );
+    return <section id="certificates" className="py-24 sm:py-32"><p className="text-center text-muted-foreground">Loading certificates...</p></section>;
   }
 
   return (
-    <section id="certificates" className="py-28 sm:py-36">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
-          My Certificates
-        </h2>
+    <section id="certificates" className="py-24 sm:py-32">
+      <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+        <h2 className="mb-4 text-center text-3xl font-bold tracking-tight md:text-4xl">Certificates</h2>
+        <p className="mx-auto mb-10 max-w-2xl text-center text-muted-foreground">A rolling showcase of courses and achievements.</p>
         <div
-          className="relative w-full overflow-x-hidden cursor-grab active:cursor-grabbing"
           ref={carouselRef}
-          onMouseDown={handleMouseDown}
-          onMouseLeave={handleMouseLeaveOrUp}
-          onMouseUp={handleMouseLeaveOrUp}
-          onMouseMove={handleMouseMove}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          onTouchMove={handleTouchMove}
+          className="relative cursor-grab overflow-x-hidden active:cursor-grabbing"
+          onMouseDown={(e) => {
+            if (!carouselRef.current) return;
+            isDragging.current = true;
+            startX.current = e.pageX - carouselRef.current.offsetLeft;
+            scrollLeftStart.current = carouselRef.current.scrollLeft;
+          }}
+          onMouseUp={() => (isDragging.current = false)}
+          onMouseLeave={() => (isDragging.current = false)}
+          onMouseMove={(e) => {
+            if (!isDragging.current || !carouselRef.current) return;
+            e.preventDefault();
+            const x = e.pageX - carouselRef.current.offsetLeft;
+            carouselRef.current.scrollLeft = scrollLeftStart.current - (x - startX.current) * 2;
+          }}
+          onTouchStart={(e) => {
+            if (!carouselRef.current) return;
+            isDragging.current = true;
+            startX.current = e.touches[0].pageX - carouselRef.current.offsetLeft;
+            scrollLeftStart.current = carouselRef.current.scrollLeft;
+          }}
+          onTouchEnd={() => (isDragging.current = false)}
+          onTouchMove={(e) => {
+            if (!isDragging.current || !carouselRef.current) return;
+            const x = e.touches[0].pageX - carouselRef.current.offsetLeft;
+            carouselRef.current.scrollLeft = scrollLeftStart.current - (x - startX.current) * 2;
+          }}
         >
           <div className="flex">
             {certificates.map((cert, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4 select-none"
-              >
-                <Card className="flex h-full flex-col overflow-hidden pointer-events-none">
+              <div key={index} className="w-full flex-shrink-0 p-3 md:w-1/2 lg:w-1/3">
+                <Card className="pointer-events-none h-full overflow-hidden rounded-2xl border-border/60 bg-card/70 shadow-md backdrop-blur-sm">
                   <div className="aspect-video overflow-hidden">
-                    <Image
-                      src={cert.image}
-                      alt={cert.title}
-                      width={500}
-                      height={300}
-                      className="h-full w-full object-cover"
-                    />
+                    <Image src={cert.image} alt={cert.title} width={500} height={300} className="h-full w-full object-cover transition duration-500 hover:scale-105" />
                   </div>
-                  <div className="flex flex-grow flex-col p-6">
-                    <CardTitle className="mb-2 text-lg">{cert.title}</CardTitle>
-                    <p className="text-sm text-muted-foreground">
-                      {cert.issuer}
-                    </p>
+                  <div className="p-5">
+                    <CardTitle className="mb-1 text-base sm:text-lg">{cert.title}</CardTitle>
+                    <p className="text-sm text-muted-foreground">{cert.issuer}</p>
                   </div>
                 </Card>
               </div>
