@@ -1,93 +1,60 @@
 "use client";
 
-import React, { useState } from "react";
-import { Card, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useProjectContext } from "@/context/ProjectContext";
+
 import { AnimatedSection } from "./AnimatedSection";
-import styles from "@/app/style/ProjectPage.module.css";
-import { Button } from "./ui/button";
+import { useProjectContext } from "@/context/ProjectContext";
 import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { Card, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import styles from "@/app/style/ProjectPage.module.css";
 
 export function ProjectPage() {
   const { projects, loading } = useProjectContext();
   const [flippedCardId, setFlippedCardId] = useState<number | null>(null);
 
-  const handleCardClick = (id: number) => {
-    setFlippedCardId(flippedCardId === id ? null : id);
-  };
-
   return (
-    <AnimatedSection id='projects' className='bg-muted/50 py-28 sm:py-36'>
-      <div className='max-w-7xl mx-auto px-6 lg:px-8'>
-        <h2 className='mb-12 text-center text-3xl font-bold md:text-4xl'>
-          My Projects
-        </h2>
+    <AnimatedSection id="projects" className="bg-muted/40 py-24 sm:py-32">
+      <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+        <h2 className="mb-4 text-center text-3xl font-bold tracking-tight md:text-4xl">Featured Projects</h2>
+        <p className="mx-auto mb-12 max-w-2xl text-center text-muted-foreground">Click each card to reveal stack and details.</p>
 
         {loading ? (
-          <div className='text-center'>
-            <p className='text-muted-foreground'>Loading projects...</p>
-          </div>
+          <p className="text-center text-muted-foreground">Loading projects...</p>
         ) : (
-          <div className='flex flex-wrap justify-center gap-8'>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {projects.map((project) => (
-              <div
-                key={project.id}
-                className={cn(
-                  "aspect-[4/3.5] w-full sm:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)]"
-                )}
-              >
-                <div
-                  className={styles.flipCard}
-                  onClick={() => handleCardClick(project.id)}
-                >
-                  <div
-                    className={cn(
-                      styles.flipCardInner,
-                      flippedCardId === project.id && styles.isFlipped
-                    )}
-                  >
+              <div key={project.id} className="aspect-[4/3.4]">
+                <div className={styles.flipCard} onClick={() => setFlippedCardId(flippedCardId === project.id ? null : project.id)}>
+                  <div className={cn(styles.flipCardInner, flippedCardId === project.id && styles.isFlipped)}>
                     <div className={styles.flipCardFront}>
-                      <Card className='flex h-full flex-col overflow-hidden'>
-                        <div className='relative flex-grow'>
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            className='object-cover'
-                          />
-                        </div>
-                        <div className='absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-12'>
-                          <CardTitle className='text-white'>
-                            {project.title}
-                          </CardTitle>
+                      <Card className="group h-full overflow-hidden rounded-2xl border-border/60 bg-card/70 shadow-md backdrop-blur-sm">
+                        <div className="relative h-full">
+                          <Image src={project.image} alt={project.title} fill className="object-cover transition duration-500 group-hover:scale-105" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                          <div className="absolute bottom-0 p-5">
+                            <CardTitle className="text-white">{project.title}</CardTitle>
+                            <p className="mt-2 text-sm text-white/80">Tap to view more</p>
+                          </div>
                         </div>
                       </Card>
                     </div>
 
                     <div className={styles.flipCardBack}>
-                      <Card className='flex h-full flex-col items-center justify-center p-6 text-center'>
-                        <h3 className='text-xl font-bold'>{project.title}</h3>
-
-                        <p className='mt-2 text-sm text-muted-foreground'>
-                          {project.description.split(".")[0] + "."}
-                        </p>
-
-                        <div className='my-4 flex flex-wrap justify-center gap-2'>
+                      <Card className="flex h-full flex-col rounded-2xl border-border/60 bg-card/85 p-5 text-center shadow-md backdrop-blur-sm">
+                        <h3 className="text-xl font-semibold">{project.title}</h3>
+                        <p className="mt-2 text-sm text-muted-foreground">{project.description.split(".")[0] + "."}</p>
+                        <div className="my-4 flex flex-wrap justify-center gap-2">
                           {project.technologies.map((tech) => (
-                            <Badge key={tech} variant='secondary'>
-                              {tech}
-                            </Badge>
+                            <Badge key={tech} variant="secondary" className="rounded-md">{tech}</Badge>
                           ))}
                         </div>
-
-                        <div className='mt-auto flex w-full flex-col gap-2'>
-                          <Link href={`/projects/${project.id}`} passHref>
-                            <Button className='w-full'>View Details</Button>
-                          </Link>
-                        </div>
+                        <Link href={`/projects/${project.id}`} className="mt-auto">
+                          <Button className="w-full rounded-xl">View Details</Button>
+                        </Link>
                       </Card>
                     </div>
                   </div>
