@@ -12,7 +12,7 @@ interface AnimatedSectionProps {
 export function AnimatedSection({ children, className, id }: AnimatedSectionProps) {
   return (
     <section id={id} className={className}>
-      <ScrollFloat>{children}</ScrollFloat>
+      <ScrollFloat className="will-change-transform">{children}</ScrollFloat>
     </section>
   );
 }
