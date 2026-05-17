@@ -4,6 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import { Card, CardTitle } from "@/components/ui/card";
+import { GradientHeading } from "./GradientHeading";
+import { GlowCard } from "./GlowCard";
+import ScrollFloat from "@/components/reactbits/ScrollFloat";
 
 interface Certificate {
   id: number;
@@ -58,7 +61,7 @@ export function CertificateSection() {
   return (
     <section id="certificates" className="py-24 sm:py-32">
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <h2 className="mb-4 text-center text-3xl font-bold tracking-tight md:text-4xl">Certificates</h2>
+        <h2 className="mb-4 text-center text-3xl font-bold tracking-tight md:text-4xl"><GradientHeading text="Certificates" /></h2>
         <p className="mx-auto mb-10 max-w-2xl text-center text-muted-foreground">A rolling showcase of courses and achievements.</p>
         <div
           ref={carouselRef}
@@ -92,17 +95,19 @@ export function CertificateSection() {
         >
           <div className="flex">
             {certificates.map((cert, index) => (
-              <div key={index} className="w-full flex-shrink-0 p-3 md:w-1/2 lg:w-1/3">
-                <Card className="pointer-events-none h-full overflow-hidden rounded-2xl border-border/60 bg-card/70 shadow-md backdrop-blur-sm">
-                  <div className="aspect-video overflow-hidden">
-                    <Image src={cert.image} alt={cert.title} width={500} height={300} className="h-full w-full object-cover transition duration-500 hover:scale-105" />
-                  </div>
-                  <div className="p-5">
-                    <CardTitle className="mb-1 text-base sm:text-lg">{cert.title}</CardTitle>
-                    <p className="text-sm text-muted-foreground">{cert.issuer}</p>
-                  </div>
-                </Card>
-              </div>
+              <ScrollFloat key={index} className="w-full flex-shrink-0 p-3 md:w-1/2 lg:w-1/3" delay={(index % 6) * 0.03}>
+                <GlowCard className="pointer-events-none h-full overflow-hidden">
+                  <Card className="h-full border-0 bg-transparent shadow-none">
+                    <div className="aspect-video overflow-hidden">
+                      <Image src={cert.image} alt={cert.title} width={500} height={300} className="h-full w-full object-cover transition duration-500 hover:scale-105" />
+                    </div>
+                    <div className="p-5">
+                      <CardTitle className="mb-1 text-base sm:text-lg">{cert.title}</CardTitle>
+                      <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+                    </div>
+                  </Card>
+                </GlowCard>
+              </ScrollFloat>
             ))}
           </div>
         </div>

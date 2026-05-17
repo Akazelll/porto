@@ -7,6 +7,9 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { GlowCard } from "./GlowCard";
+import { GradientHeading } from "./GradientHeading";
+import ScrollFloat from "@/components/reactbits/ScrollFloat";
 
 export function HeroSection() {
   const [init, setInit] = useState(false);
@@ -46,30 +49,32 @@ export function HeroSection() {
         />
       )}
 
-      <div className="mx-auto w-full max-w-5xl rounded-3xl border border-border/60 bg-card/40 p-6 text-center shadow-2xl backdrop-blur-md sm:p-10 lg:p-14">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-primary/90">Full Stack Developer</p>
-        <h1 className="mx-auto max-w-4xl text-balance text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-          Building modern, scalable web experiences with clean engineering.
-        </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-          Hi, I&apos;m Akazell. I craft responsive, performant, and elegant digital products with strong attention to UI, UX, and maintainable code quality.
-        </p>
+      <ScrollFloat className="mx-auto w-full max-w-5xl">
+        <GlowCard className="rounded-3xl p-6 text-center shadow-2xl sm:p-10 lg:p-14">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-primary/90">Full Stack Developer</p>
+          <h1 className="mx-auto max-w-4xl text-balance text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+            <GradientHeading text="Building modern, scalable web experiences with clean engineering." />
+          </h1>
+          <p className="mx-auto mt-5 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
+            Hi, I&apos;m Akazell. I craft responsive, performant, and elegant digital products with strong attention to UI, UX, and maintainable code quality.
+          </p>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href="#projects">
-            <Button size="lg" className="w-52 rounded-xl">Explore Projects</Button>
-          </a>
-          <a href="#contact">
-            <Button variant="outline" size="lg" className="w-52 rounded-xl">Let&apos;s Collaborate</Button>
-          </a>
-        </div>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a href="#projects">
+              <Button size="lg" className="w-52 rounded-xl">Explore Projects</Button>
+            </a>
+            <a href="#contact">
+              <Button variant="outline" size="lg" className="w-52 rounded-xl">Let&apos;s Collaborate</Button>
+            </a>
+          </div>
 
-        <div className="mt-7 flex items-center justify-center gap-3">
-          <Link href="https://github.com/Akazelll" target="_blank" rel="noopener noreferrer"><Button variant="outline" size="icon" className="rounded-xl"><Github className="h-4 w-4" /></Button></Link>
-          <Link href="https://www.linkedin.com/in/adamxraga" target="_blank" rel="noopener noreferrer"><Button variant="outline" size="icon" className="rounded-xl"><Linkedin className="h-4 w-4" /></Button></Link>
-          <Link href="mailto:adamxraga@gmail.com"><Button variant="outline" size="icon" className="rounded-xl"><Mail className="h-4 w-4" /></Button></Link>
-        </div>
-      </div>
+          <div className="mt-7 flex items-center justify-center gap-3">
+            <Link href="https://github.com/Akazelll" target="_blank" rel="noopener noreferrer"><Button variant="outline" size="icon" className="rounded-xl"><Github className="h-4 w-4" /></Button></Link>
+            <Link href="https://www.linkedin.com/in/adamxraga" target="_blank" rel="noopener noreferrer"><Button variant="outline" size="icon" className="rounded-xl"><Linkedin className="h-4 w-4" /></Button></Link>
+            <Link href="mailto:adamxraga@gmail.com"><Button variant="outline" size="icon" className="rounded-xl"><Mail className="h-4 w-4" /></Button></Link>
+          </div>
+        </GlowCard>
+      </ScrollFloat>
     </section>
   );
 }
