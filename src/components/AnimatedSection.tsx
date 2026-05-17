@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import ScrollFloat from "@/components/reactbits/ScrollFloat";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -11,15 +11,8 @@ interface AnimatedSectionProps {
 
 export function AnimatedSection({ children, className, id }: AnimatedSectionProps) {
   return (
-    <motion.section
-      id={id}
-      className={className}
-      initial={{ opacity: 0, y: 50 }} 
-      whileInView={{ opacity: 1, y: 0 }} 
-      viewport={{ once: true, amount: 0.2 }} 
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
-      {children}
-    </motion.section>
+    <section id={id} className={className}>
+      <ScrollFloat>{children}</ScrollFloat>
+    </section>
   );
 }

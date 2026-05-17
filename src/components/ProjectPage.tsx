@@ -9,6 +9,9 @@ import { useProjectContext } from "@/context/ProjectContext";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
+import { GradientHeading } from "./GradientHeading";
+import { GlowCard } from "./GlowCard";
+import ScrollFloat from "@/components/reactbits/ScrollFloat";
 import { cn } from "@/lib/utils";
 import styles from "@/app/style/ProjectPage.module.css";
 
@@ -19,7 +22,7 @@ export function ProjectPage() {
   return (
     <AnimatedSection id="projects" className="bg-muted/40 py-24 sm:py-32">
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <h2 className="mb-4 text-center text-3xl font-bold tracking-tight md:text-4xl">Featured Projects</h2>
+        <h2 className="mb-4 text-center text-3xl font-bold tracking-tight md:text-4xl"><GradientHeading text="Featured Projects" /></h2>
         <p className="mx-auto mb-12 max-w-2xl text-center text-muted-foreground">Click each card to reveal stack and details.</p>
 
         {loading ? (
@@ -27,11 +30,12 @@ export function ProjectPage() {
         ) : (
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {projects.map((project) => (
-              <div key={project.id} className="aspect-[4/3.4]">
+              <ScrollFloat key={project.id} className="aspect-[4/3.4]" delay={0.04 * project.id}>
                 <div className={styles.flipCard} onClick={() => setFlippedCardId(flippedCardId === project.id ? null : project.id)}>
                   <div className={cn(styles.flipCardInner, flippedCardId === project.id && styles.isFlipped)}>
                     <div className={styles.flipCardFront}>
-                      <Card className="group h-full overflow-hidden rounded-2xl border-border/60 bg-card/70 shadow-md backdrop-blur-sm">
+                      <GlowCard className="group h-full overflow-hidden">
+                        <Card className="h-full border-0 bg-transparent shadow-none">
                         <div className="relative h-full">
                           <Image src={project.image} alt={project.title} fill className="object-cover transition duration-500 group-hover:scale-105" />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
@@ -41,10 +45,12 @@ export function ProjectPage() {
                           </div>
                         </div>
                       </Card>
+                      </GlowCard>
                     </div>
 
                     <div className={styles.flipCardBack}>
-                      <Card className="flex h-full flex-col rounded-2xl border-border/60 bg-card/85 p-5 text-center shadow-md backdrop-blur-sm">
+                      <GlowCard className="h-full p-5">
+                        <Card className="flex h-full flex-col border-0 bg-transparent p-0 text-center shadow-none">
                         <h3 className="text-xl font-semibold">{project.title}</h3>
                         <p className="mt-2 text-sm text-muted-foreground">{project.description.split(".")[0] + "."}</p>
                         <div className="my-4 flex flex-wrap justify-center gap-2">
@@ -56,10 +62,11 @@ export function ProjectPage() {
                           <Button className="w-full rounded-xl">View Details</Button>
                         </Link>
                       </Card>
+                      </GlowCard>
                     </div>
                   </div>
                 </div>
-              </div>
+              </ScrollFloat>
             ))}
           </div>
         )}
