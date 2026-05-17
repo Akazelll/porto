@@ -9,10 +9,14 @@ interface AnimatedSectionProps {
   id?: string;
 }
 
-export function AnimatedSection({ children, className, id }: AnimatedSectionProps) {
+export function AnimatedSection({
+  children,
+  className,
+  id,
+}: AnimatedSectionProps) {
   return (
     <section id={id} className={className}>
-      <ScrollFloat className="will-change-transform">{children}</ScrollFloat>
+      <ScrollFloat className='will-change-transform'>{children}</ScrollFloat>
     </section>
   );
 }

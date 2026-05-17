@@ -12,7 +12,7 @@ export function GlowCard({ children, className }: GlowCardProps) {
     <BorderGlow
       className={cn(
         "rounded-2xl border border-border/70 bg-card/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/10",
-        className
+        className,
       )}
     >
       {children}

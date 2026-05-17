@@ -9,10 +9,10 @@ import { PortfolioBackground } from "@/components/PortfolioBackground";
 
 export default function Home() {
   return (
-    <div className="relative flex min-h-screen flex-col bg-gradient-to-b from-background/95 via-background/90 to-muted/30 selection:bg-primary/25">
+    <div className='relative flex min-h-screen flex-col bg-gradient-to-b from-background/95 via-background/90 to-muted/30 selection:bg-primary/25'>
       <PortfolioBackground />
       <Navbar />
-      <main className="flex-grow">
+      <main className='flex-grow'>
         <HeroSection />
         <AboutPage />
         <ProjectPage />
