@@ -1,0 +1,26 @@
+.dot {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 50%;
+  background-color: #0B6E4F;
+  transform: translate(-50%, -50%);
+  animation: dot-fade 0.7s ease-out forwards;
+}
+
+@keyframes dot-fade {
+  0% {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(1);
+    filter: blur(0px);
+  }
+  60% {
+    opacity: 0.4;
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+    filter: blur(3px);
+  }
+}

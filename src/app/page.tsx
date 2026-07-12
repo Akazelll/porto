@@ -1,20 +1,22 @@
-import { AboutPage } from "@/components/AboutPage";
-import { CertificateSection } from "@/components/CertificateSection";
-import { ContactForm } from "@/components/ContactForm";
-import { Footer } from "@/components/Footer";
-import { HeroSection } from "@/components/HeroSection";
-import { Navbar } from "@/components/Navbar";
-import { ProjectPage } from "@/components/ProjectPage";
-import { PortfolioBackground } from "@/components/PortfolioBackground";
+import { AboutPage } from "@/components/features/about/AboutPage";
+import { TechStackSection } from "@/components/features/about/TechStackSection";
+import { CertificateSection } from "@/components/features/certificates/CertificateSection";
+import { ContactForm } from "@/components/features/contact/ContactForm";
+import { Footer } from "@/components/layout/Footer";
+import { HeroSection } from "@/components/features/hero/HeroSection";
+import { Navbar } from "@/components/layout/Navbar";
+import { ProjectPage } from "@/components/features/projects/ProjectPage";
+import { PortfolioBackground } from "@/components/layout/PortfolioBackground";
 
 export default function Home() {
   return (
-    <div className='relative flex min-h-screen flex-col bg-gradient-to-b from-background/95 via-background/90 to-muted/30 selection:bg-primary/25'>
+    <div className="relative flex min-h-screen flex-col bg-background">
       <PortfolioBackground />
       <Navbar />
-      <main className='flex-grow'>
+      <main className="flex-grow">
         <HeroSection />
         <AboutPage />
+        <TechStackSection />
         <ProjectPage />
         <CertificateSection />
         <ContactForm />
